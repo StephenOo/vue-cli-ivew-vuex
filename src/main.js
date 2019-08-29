@@ -1,15 +1,15 @@
 import Vue from 'vue';
-import { Button } from 'iview';
 import App from './App.vue';
 import router from './router/router';
 import store from './store';
 import 'iview/dist/styles/iview.css';
 import '@/icons/index';
+import iview from './iview';
 
 
 Vue.use(router);
+Vue.use(iview);
 
-Vue.component('Button', Button);
 Vue.config.productionTip = false;
 
 new Vue({

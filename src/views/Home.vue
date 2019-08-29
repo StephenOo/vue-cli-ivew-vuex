@@ -2,7 +2,9 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <Button type="info">info</Button>
-    <svg-icon icon-class='soccer'/>
+    <div class="soccer">
+      <svg-icon icon-class="soccer" />
+    </div>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
@@ -18,3 +20,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.soccer {
+  font-size: 48px;
+}
+</style>
