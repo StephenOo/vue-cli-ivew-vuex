@@ -18,28 +18,26 @@
           class="my-input"
         />
       </FormItem>
-      <Tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" class="tool-tip">
-        <FormItem prop="password">
-          <span class="svg-container">
-            <svg-icon icon-class="password"/>
-          </span>
-          <Input
-            :key="passwordType"
-            ref="password"
-            :type="passwordType"
-            v-model='loginForm.password'
-            placeholder='Password'
-            name="password"
-            autocomplete="on"
-            @keyup.native="checkCapslock"
-            @blur="capsTooltip = false"
-            @keyup.enter.native="handleLogin"
-          />
-          <span class="show-pwd" @click="showPwd">
-            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
-          </span>
-        </FormItem>
-      </Tooltip>
+      <FormItem prop="password">
+        <span class="svg-container">
+          <svg-icon icon-class="password"/>
+        </span>
+        <Input
+          :key="passwordType"
+          ref="password"
+          :type="passwordType"
+          v-model='loginForm.password'
+          placeholder='Password'
+          name="password"
+          autocomplete="on"
+          @keyup.native="checkCapslock"
+          @blur="capsTooltip = false"
+          @keyup.enter.native="handleLogin"
+        />
+        <span class="show-pwd" @click="showPwd">
+          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
+        </span>
+      </FormItem>
       <FormItem>
         <Button type='primary' :loading="loading" @click.native.prevent="handleLogin">
           <span v-if="!loading">Login</span>
@@ -86,6 +84,13 @@ export default {
       otherQuery: {},
     };
   },
+  directives: {
+    focus: {
+      inserted(el) {
+        el.focus();
+      },
+    },
+  },
   watch: {
     $route: {
       handler(route) {
@@ -102,11 +107,13 @@ export default {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === '') {
-      this.$refs.username.focus();
-    } else if (this.loginForm.password === '') {
-      this.$refs.password.focus();
-    }
+    // if (this.loginForm.username === '') {
+    //   this.$refs.username.focus();
+    //   console.log(1111);
+    // } else if (this.loginForm.password === '') {
+    //   this.$refs.password.focus();
+    //   console.log(22222);
+    // }
   },
   destroyed() {
     // window.removeEventListener('storage', this.afterQRScan)

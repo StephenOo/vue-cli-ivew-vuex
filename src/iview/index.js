@@ -5,6 +5,7 @@ import {
   Icon,
   FormItem,
   Tooltip,
+  Message,
 } from 'iview';
 
 const iview = {
@@ -15,6 +16,7 @@ const iview = {
     Vue.component('Icon', Icon);
     Vue.component('Input', Input);
     Vue.component('Tooltip', Tooltip);
+    Vue.component('Message', Message);
   },
 };
 
