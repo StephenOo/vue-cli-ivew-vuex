@@ -2,7 +2,11 @@
   <div ref="rightPanel" :class="{show: show}" class="rightPanel-container">
     <div class="rightPanel-background" />
     <div class="rightPanel">
-      <div class="handle-button" :style="{'top':buttonTop+'px', 'background-color':theme}" @click="show=!show">
+      <div
+        class="handle-button"
+        :style="{'top':buttonTop+'px', 'background-color':theme}"
+        click="show=!show"
+      >
         <Icon :type="show ? 'md-close' : 'md-settings'" />
       </div>
       <div class="rightPanel-items">
@@ -64,7 +68,7 @@ export default {
       const parent = evt.target.closest('.rightPanel');
       if (!parent) {
         this.show = false;
-        window.removeEventListener('click', this.closeSidebar)
+        window.removeEventListener('click', this.closeSidebar);
       }
     },
     insertToBody() {
@@ -83,8 +87,7 @@ export default {
     width: calc(100% - 15px);
   }
 </style>
-
-<style lang="sass" scoped>
+<style lang="scss" scoped>
   .rightPanel-background {
     position: fixed;
     top: 0;
@@ -122,7 +125,7 @@ export default {
     left: -48px;
     text-align: center;
     font-size: 24px;
-    border-radius: 6px 0 0 6px !imporatant;
+    border-radius: 6px 0 0 6px;
     z-index: 0;
     pointer-events: auto;
     cursor: pointer;
