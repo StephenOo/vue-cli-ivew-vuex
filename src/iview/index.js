@@ -6,6 +6,8 @@ import {
   FormItem,
   Tooltip,
   Message,
+  Switch,
+  ColorPicker,
 } from 'iview';
 
 const iview = {
@@ -17,6 +19,8 @@ const iview = {
     Vue.component('Input', Input);
     Vue.component('Tooltip', Tooltip);
     Vue.component('Message', Message);
+    Vue.component('Switch', Switch);
+    Vue.component('ColorPicker', ColorPicker);
   },
 };
 
