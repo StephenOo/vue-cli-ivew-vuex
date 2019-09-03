@@ -10,6 +10,7 @@ import {
   ColorPicker,
   Row,
   Col,
+  Modal,
 } from 'iview';
 
 const iview = {
@@ -25,6 +26,7 @@ const iview = {
     Vue.component('ColorPicker', ColorPicker);
     Vue.component('Row', Row);
     Vue.component('Col', Col);
+    Vue.component('Modal', Modal);
   },
 };
 

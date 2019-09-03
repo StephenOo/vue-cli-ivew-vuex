@@ -1,6 +1,6 @@
 <template>
   <div class="errPage-container">
-    <Button icon="el-icon-arrow-left" class="pan-back-btn" @click="back">
+    <Button icon="ios-arrow-back" class="pan-back-btn" @click="back">
       返回
     </Button>
     <Row>
@@ -28,9 +28,9 @@
         <img :src="errGif" width="313" height="428" alt="Girl has dropped her ice cream.">
       </i-col>
     </Row>
-    <el-dialog :visible.sync="dialogVisible" title="随便看">
+    <Modal :value="dialogVisible" title="随便看">
       <img :src="ewizardClap" class="pan-img">
-    </el-dialog>
+    </Modal>
   </div>
 </template>
 
