@@ -8,6 +8,8 @@ import {
   Message,
   Switch,
   ColorPicker,
+  Row,
+  Col,
 } from 'iview';
 
 const iview = {
@@ -21,6 +23,8 @@ const iview = {
     Vue.component('Message', Message);
     Vue.component('Switch', Switch);
     Vue.component('ColorPicker', ColorPicker);
+    Vue.component('Row', Row);
+    Vue.component('Col', Col);
   },
 };
 
