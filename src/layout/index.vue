@@ -51,15 +51,15 @@ export default {
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile',
-      };
-    },
+      }
+    }
   },
   methods: {
     handleClickOutSide() {
-      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false });
-    },
-  },
-};
+      this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

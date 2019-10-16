@@ -5,27 +5,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import adminDashboard from './admin/index.vue';
-import editorDashboard from './editor/index.vue';
+import { mapGetters } from 'vuex'
+import adminDashboard from './admin/index.vue'
+import editorDashboard from './editor/index.vue'
 
 export default {
   name: 'Dashboard',
   components: { adminDashboard, editorDashboard },
   data() {
     return {
-      currentRole: 'adminDashboard',
-    };
+      currentRole: 'adminDashboard'
+    }
   },
   computed: {
     ...mapGetters([
-      'roles',
-    ]),
+      'roles'
+    ])
   },
   created() {
     if (!this.roles.include('admin')) {
-      this.currentRole = 'editorDashboard';
+      this.currentRole = 'editorDashboard'
     }
-  },
-};
+  }
+}
 </script>
