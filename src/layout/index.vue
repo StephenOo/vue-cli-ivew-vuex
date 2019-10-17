@@ -14,17 +14,16 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import RightPanel from '@/components/RightPanel/index.vue';
+import { mapState } from 'vuex'
+import RightPanel from '@/components/RightPanel/index.vue'
 import {
   AppMain,
   Navbar,
   Settings,
   Sidebar,
-  TagsView,
-} from './components';
-import ResizeMixin from './mixin/ResizeHandler';
-
+  TagsView
+} from './components'
+import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
   name: 'Layout',
@@ -34,7 +33,7 @@ export default {
     RightPanel,
     Settings,
     Sidebar,
-    TagsView,
+    TagsView
   },
   mixins: [ResizeMixin],
   computed: {
@@ -43,14 +42,14 @@ export default {
       device: state => state.app.device,
       showSettings: state => state.app.showSettings,
       needTagsView: state => state.app.needTagsView,
-      fixedHeader: state => state.app.fixedHeader,
+      fixedHeader: state => state.app.fixedHeader
     }),
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === 'mobile',
+        mobile: this.device === 'mobile'
       }
     }
   },

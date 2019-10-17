@@ -10,10 +10,10 @@
 export default {
   data() {
     return {
-      msg: '韩二虎',
-    };
-  },
-};
+      msg: '韩二虎'
+    }
+  }
+}
 </script>
 <style scoped>
 .svg-container {

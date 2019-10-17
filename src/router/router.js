@@ -1,12 +1,12 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 
 /* Layout */
-import Layout from '@/layout/index.vue';
+import Layout from '@/layout'
 
 /* Router Modules */
 
-Vue.use(Router);
+Vue.use(Router)
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -42,39 +42,39 @@ export const constantRoutes = [
     children: [
       {
         path: '/redirect/:path*',
-        component: () => import('@/views/redirect/index'),
-      },
-    ],
+        component: () => import('@/views/redirect/index')
+      }
+    ]
   },
   {
     path: '/login',
     component: () => import('@/views/login/index'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/about',
     component: () => import('@/views/About'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/home',
     component: () => import('@/views/Home'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/404',
     component: () => import('@/views/error-page/404'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/401',
     component: () => import('@/views/error-page/401'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/',
@@ -85,50 +85,11 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true },
-      },
-    ],
-  },
-  // {
-  //   path: '/documentation',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/documentation/index'),
-  //       name: 'Documentation',
-  //       meta: { title: 'Documentation', icon: 'documentation', affix: true },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/guide',
-  //   component: Layout,
-  //   redirect: '/guide/index',
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/guide/index'),
-  //       name: 'Guide',
-  //       meta: { title: 'Guide', icon: 'guide', noCache: true },
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/profile',
-  //   component: Layout,
-  //   redirect: '/profile/index',
-  //   hidden: true,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/profile/index'),
-  //       name: 'Profile',
-  //       meta: { title: 'Profile', icon: 'user', noCache: true },
-  //     },
-  //   ],
-  // },
-];
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+      }
+    ]
+  }
+]
 
 /**
  * asyncRoutes
@@ -144,7 +105,7 @@ export const asyncRoutes = [
     meta: {
       title: 'Permission',
       icon: 'lock',
-      roles: ['admin', 'editor'], // you can set roles in root nav
+      roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
       {
@@ -153,17 +114,17 @@ export const asyncRoutes = [
         name: 'PagePermission',
         meta: {
           title: 'Page Permission',
-          roles: ['admin'], // or you can only set roles in the sub nav
-        },
+          roles: ['admin'] // or you can only set roles in the sub nav
+        }
       },
       {
         path: 'directive',
         component: () => import('@/views/permission/directive'),
         name: 'DirectivePermission',
         meta: {
-          title: 'Directive Permission',
+          title: 'Directive Permission'
           // if do not set roles, means: this page does not require permission
-        },
+        }
       },
       {
         path: 'role',
@@ -171,10 +132,10 @@ export const asyncRoutes = [
         name: 'RolePermission',
         meta: {
           title: 'Role Permission',
-          roles: ['admin'],
-        },
-      },
-    ],
+          roles: ['admin']
+        }
+      }
+    ]
   },
   {
     path: '/icon',
@@ -187,24 +148,23 @@ export const asyncRoutes = [
         meta: {
           title: 'Icons',
           icon: 'icon',
-          noCache: true,
-        },
-      },
-    ],
-  },
-];
-
+          noCache: true
+        }
+      }
+    ]
+  }
+]
 
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes,
-});
+  routes: constantRoutes
+})
 
-const router = createRouter();
+const router = createRouter()
 
 export function resetRouter() {
-  const newRouter = createRouter();
-  router.matcher = newRouter.matcher;
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher
 }
 
-export default router;
+export default router

@@ -1,15 +1,13 @@
 <template>
-  <div class='login-container'>
+  <div class='login_container'>
     <Form ref='loginForm' :model='loginForm' :rules='loginRules' class="login-form">
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">系统登录</h3>
       </div>
       <FormItem prop='username'>
-        <span class="svg-container">
-          <svg-icon icon-class="user"/>
-        </span>
         <Input
           ref="username"
+          prefix="ios-contact"
           type='text'
           v-model='loginForm.username'
           placeholder='Usernam'
@@ -19,30 +17,32 @@
         />
       </FormItem>
       <FormItem prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password"/>
-        </span>
-        <Input
-          :key="passwordType"
-          ref="password"
-          :type="passwordType"
-          v-model='loginForm.password'
-          placeholder='Password'
-          name="password"
-          autocomplete="on"
-          @keyup.native="checkCapslock"
-          @blur="capsTooltip = false"
-          @keyup.enter.native="handleLogin"
-        />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
-        </span>
+        <div class="pwd_container">
+          <Poptip v-model="capsTooltip" :disabled="!capsTooltip" placement="right" trigger="focus">
+            <Input
+              ref="password"
+              prefix="ios-lock"
+              :type="passwordType"
+              v-model='loginForm.password'
+              placeholder='Password'
+              name="password"
+              @keyup.native="checkCapslock"
+              @keyup.enter.native="handleLogin"
+            />
+            <div slot="content">Caps lock is On</div>
+          </Poptip>
+          <span class="show-pwd" @click="showPwd">
+            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
+          </span>
+        </div>
       </FormItem>
       <FormItem>
-        <Button type='primary' :loading="loading" @click.native.prevent="handleLogin">
-          <span v-if="!loading">Login</span>
-          <span v-else>Loading...</span>
-        </Button>
+        <div class="btn_container">
+          <Button type='primary' :loading="loading" @click.native.prevent="handleLogin">
+            <span v-if="!loading">Login</span>
+            <span v-else>Loading...</span>
+          </Button>
+        </div>
       </FormItem>
     </Form>
   </div>
@@ -53,120 +53,99 @@ export default {
     return {
       loginForm: {
         username: '',
-        password: '',
+        password: ''
       },
       loginRules: {
         username: [
           {
             required: true,
             message: 'Please fill in the username',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
         password: [
           {
             required: true,
             message: 'Please fill in the password',
-            trigger: 'blur',
+            trigger: 'blur'
           },
           {
             type: 'string',
             min: 6,
             message: 'The password length cannot be less than 6 bits',
-            trigger: 'blur',
-          },
-        ],
+            trigger: 'blur'
+          }
+        ]
       },
       passwordType: 'password',
       capsTooltip: false,
       redirect: undefined,
       loading: false,
-      otherQuery: {},
-    };
-  },
-  directives: {
-    focus: {
-      inserted(el) {
-        el.focus();
-      },
-    },
+      otherQuery: {}
+    }
   },
   watch: {
     $route: {
       handler(route) {
-        const { query } = route;
+        const { query } = route
         if (query) {
-          this.redirect = query.redirect;
-          this.otherQuery = this.getOtherQuery(query);
+          this.redirect = query.redirect
+          this.otherQuery = this.getOtherQuery(query)
         }
       },
-      immediate: true,
-    },
-  },
-  created() {
-    // window.addEventListener('storage', this.afterQRScan)
-  },
-  mounted() {
-    // if (this.loginForm.username === '') {
-    //   this.$refs.username.focus();
-    //   console.log(1111);
-    // } else if (this.loginForm.password === '') {
-    //   this.$refs.password.focus();
-    //   console.log(22222);
-    // }
-  },
-  destroyed() {
-    // window.removeEventListener('storage', this.afterQRScan)
+      immediate: true
+    }
   },
   methods: {
     checkCapslock({ shiftKey, key } = {}) {
       if (key && key.length === 1) {
-        if ((shiftKey && (key >= 'a' && key <= 'z')) || (!shiftKey && (key >= 'A' && key <= 'Z'))) {
-          this.capsTooltip = true;
+        if (key >= 'A' && key <= 'Z') {
+          this.capsTooltip = true
         } else {
-          this.capsTooltip = false;
+          this.capsTooltip = false
         }
       }
       if (key === 'CapsLock' && this.capsTooltip === true) {
-        this.capsTooltip = false;
+        this.capsTooltip = false
       }
     },
     showPwd() {
       if (this.passwordType === 'password') {
-        this.passwordType = 'text';
+        this.passwordType = 'text'
       } else {
-        this.passwordType = 'password';
+        this.passwordType = 'password'
       }
       this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
+        this.$refs.password.focus()
+      })
     },
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          this.loading = true;
+          this.loading = true
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
               this.$router.push({
-                path: this.redirect || '/', query: this.otherQuery,
-              });
-              this.loading = false;
-            });
-          this.$Message.success('Success!');
+                path: this.redirect || '/',
+                query: this.otherQuery
+              })
+              this.loading = false
+            })
+          this.$Message.success('Success!')
         } else {
-          this.$Message.error('Fail!');
+          this.$Message.error('Fail!')
         }
-        return false;
-      });
+        return false
+      })
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
         if (cur !== 'redirect') {
-          acc[cur] = query[cur];
+          acc[cur] = query[cur]
         }
-        return acc;
-      }, {});
-    },
+        return acc
+      }, {})
+    }
     // afterQRScan() {
     //   if (e.key === 'x-admin-oauth-code') {
     //     const code = getQueryObject(e.newValue)
@@ -185,12 +164,19 @@ export default {
     //     }
     //   }
     // }
-  },
-};
+  }
+}
 </script>
-<style>
-  .ivu-input {
-    padding-left: 30px !important;
+<style lang='scss'>
+  .pwd_container {
+    .ivu-poptip, .ivu-poptip-rel {
+      display: block;
+    }
+  }
+  .btn_container {
+    .ivu-btn {
+      width: 100%;
+    }
   }
 </style>
 <style lang="scss" scoped>
@@ -198,11 +184,10 @@ export default {
   $dark_gray:#889aa4;
   $light_gray:#eee;
 
-  .login-container {
-    min-height: 100%;
-    width: 100%;
+  .login_container {
+    height: 100%;
+    text-align: center;
     background-color: $bg;
-    overflow: hidden;
   }
 
   .login-form {
@@ -211,17 +196,6 @@ export default {
     max-width: 100%;
     padding: 160px 35px 0;
     margin: 0 auto;
-    overflow: hidden;
-  }
-
-  .svg-container {
-    position: absolute;
-    top: 1px;
-    z-index: 2;
-    color: $dark_gray;
-    vertical-align: middle;
-    width: 30px;
-    display: inline-block;
   }
 
   .title-container {
@@ -246,8 +220,16 @@ export default {
     user-select: none;
   }
 
-  .tool-tip {
-    width: 450px;
+  .thirdparty-button {
+    position: absolute;
+    right: 0;
+    bottom: 6px;
+  }
+
+  @media only screen and (max-width: 470px) {
+    .thirdparty-button {
+      display: none;
+    }
   }
 
 </style>
