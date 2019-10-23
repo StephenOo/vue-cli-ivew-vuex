@@ -4,18 +4,18 @@
 
 /**
  * Check if an elemnt has a class
- * @param {HTMLElement} ele 
+ * @param {HTMLElement} ele
  * @param {string} cls
- * @returns {boolean} 
+ * @returns {boolean}
  */
 export function hasClass(ele, cls) {
-  return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+  return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))
 }
 
 /**
  * Add class to element
- * @param {HTMLElement} ele 
- * @param {string} cls 
+ * @param {HTMLElement} ele
+ * @param {string} cls
  */
 export function addClass(ele, cls) {
   if (!hasClass(ele, cls)) ele.className += ' ' + cls
@@ -23,12 +23,33 @@ export function addClass(ele, cls) {
 
 /**
  * Remove class from element
- * @param {HTMLElement} ele 
- * @param {string} cls 
+ * @param {HTMLElement} ele
+ * @param {string} cls
  */
 export function removeClass(ele, cls) {
   if (hasClass(ele, cls)) {
-    const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
-    ele.className = ele.className.replace(reg, ' ');
+    const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)')
+    ele.className = ele.className.replace(reg, ' ')
   }
+}
+
+/**
+ * @param {string} url
+ * @returns {object}
+ */
+
+export function param2Obj(url) {
+  const search = url.split('?')[1]
+  if (!search) {
+    return {}
+  }
+  return JSON.parse(
+    '{"' +
+    decodeURIComponent(search)
+      .replace(/"/g, '\\"')
+      .replace(/&/g, '","')
+      .replace(/=/g, '":"')
+      .replace(/\+/g, ' ') +
+    '"}'
+  )
 }

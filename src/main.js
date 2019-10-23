@@ -5,14 +5,10 @@ import store from './store'
 import 'iview/dist/styles/iview.css'
 import '@/icons' // icon
 import './permission' // permission control
-
 import iview from './iview'
 
+require('./mock')
 
-import { mockXHR } from '../mock'
-if (process.env.NODE_ENV === 'production') {
-  mockXHR()
-}
 Vue.use(router)
 Vue.use(iview)
 
