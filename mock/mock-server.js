@@ -1,5 +1,5 @@
 const chokidar = require('chokidar')
-const bodyParse = require('body-parse')
+const bodyParser = require('body-parser')
 const chalk = require('chalk')
 const path = require('path')
 
@@ -33,8 +33,8 @@ module.exports = app => {
 
   // parse app.body
   // https://expressjs.com/en/4x/api.html#req.body
-  app.use(bodyParse.join())
-  app.use(bodyParse.urlencoded({
+  app.use(bodyParser.join())
+  app.use(bodyParser.urlencoded({
     extended: true
   }))
 
